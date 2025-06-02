@@ -10,10 +10,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentTransaction;
 
-public class MainActivity extends AppCompatActivity implements ActionBar.TabListener {
-
+public class MainActivity extends AppCompatActivity implements ActionBar.TabListener{
     ActionBar.Tab tab1, tab2, tab3;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +33,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         tab3.setTabListener(this);
         bar.addTab(tab3);
 
-
-        
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -45,31 +42,27 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         });
     }
 
-    MyTabFragment[] myTabFragments = new MyTabFragment[3];
-
+    MyTabFragment[] myTabFragments=new MyTabFragment[3];
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
         MyTabFragment myTabFragment = null;
 
-        if(myTabFragments [tab.getPosition()] == null){
+        if(myTabFragments[tab.getPosition()] == null){
             myTabFragment = new MyTabFragment();
             Bundle data = new Bundle();
-            data.putString("tabName",tab.getText().toString());
+            data.putString("tabName", tab.getText().toString());
             myTabFragment.setArguments(data);
-            myTabFragments[tab.getPosition()]=myTabFragment;
+            myTabFragments[tab.getPosition()]= myTabFragment;
         }else{
             myTabFragment = myTabFragments[tab.getPosition()];
         }
 
-        ft.replace(android.R.id.content,myTabFragment);
-
+        ft.replace(android.R.id.content, myTabFragment);
     }
-
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
 
     }
-
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
 
